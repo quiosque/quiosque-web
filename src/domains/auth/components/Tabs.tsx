@@ -1,6 +1,7 @@
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AdminForm } from "./AdminForm";
+import { ColaboratorForm } from "./ColaboratorForm";
 
 export function AuthTabs() {
   return (
@@ -11,6 +12,10 @@ export function AuthTabs() {
       </TabsList>
       <TabsContent value="admin">
         <AdminForm />
+      </TabsContent>
+
+      <TabsContent value="colaborator">
+        <ColaboratorForm />
       </TabsContent>
     </Tabs>
   );
