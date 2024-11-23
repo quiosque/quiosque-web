@@ -43,8 +43,7 @@ export function ColaboratorForm() {
             <Label htmlFor="code">Código do empregador</Label>
             <Input
               id="code"
-              type="number"
-              placeholder="exemplo@exemplo.com"
+              placeholder="3XEMPLO"
               {...register("code")}
             />
           </div>
