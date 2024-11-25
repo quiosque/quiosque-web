@@ -25,7 +25,7 @@ const ROW_HEIGHT = 168;
 
 function DashboardScreen() {
   return (
-    <div className="w-screen h-screen overflow-hidden p-2">
+    <div className="w-screen h-screen p-2">
       <ResponsiveGridLayout
         containerPadding={[0, 0]}
         className="layout"
