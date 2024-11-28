@@ -1,24 +1,28 @@
-import React, { StrictMode } from 'react'
-import './index.css'
-import { routeTree } from './routeTree.gen'
-import ReactDOM from 'react-dom/client'
-import { RouterProvider, createRouter } from '@tanstack/react-router'
+import React, { StrictMode } from "react";
+import "./index.css";
+import { routeTree } from "./routeTree.gen";
+import ReactDOM from "react-dom/client";
+import { RouterProvider, createRouter } from "@tanstack/react-router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-const router = createRouter({ routeTree })
+const router = createRouter({ routeTree });
+const queryClient = new QueryClient();
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface Register {
-    router: typeof router
+    router: typeof router;
   }
 }
 
-const rootElement = document.getElementById('root')!
+const rootElement = document.getElementById("root")!;
 
 if (!rootElement.innerHTML) {
-  const root = ReactDOM.createRoot(rootElement)
+  const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
-      <RouterProvider router={router} />
-    </StrictMode>,
-  )
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </StrictMode>
+  );
 }

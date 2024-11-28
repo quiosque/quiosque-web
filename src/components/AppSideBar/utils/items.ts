@@ -26,7 +26,7 @@ export const MENU_GROUP_ITEMS: Array<MenuGroup> = [
     items: [
       {
         title: "Listar itens",
-        url: "/items",
+        url: "/items/list",
         icon: PackageOpen,
       },
       {
