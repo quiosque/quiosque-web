@@ -1,4 +1,4 @@
-import { Home, LucideIcon, Package, PackageOpen } from "lucide-react";
+import { ChartLine, LucideIcon, Package, PackageOpen } from "lucide-react";
 
 export type MenuGroupItem = {
   title: string;
@@ -17,7 +17,7 @@ export const MENU_GROUP_ITEMS: Array<MenuGroup> = [
       {
         title: "Dashboard",
         url: "/dashboard",
-        icon: Home,
+        icon: ChartLine,
       },
     ],
   },
@@ -26,7 +26,7 @@ export const MENU_GROUP_ITEMS: Array<MenuGroup> = [
     items: [
       {
         title: "Listar itens",
-        url: "/items",
+        url: "/items/list",
         icon: PackageOpen,
       },
       {

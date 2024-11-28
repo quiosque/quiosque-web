@@ -24,8 +24,8 @@ function AppSidebar() {
           </LogoLink>
           <SidebarGroupContent>
             <SidebarMenu>
-              {MENU_GROUP_ITEMS.map((group) => (
-                <>
+              {MENU_GROUP_ITEMS.map((group, index) => (
+                <React.Fragment key={`${group.group_title}-${index}`}>
                   {group.group_title && (
                     <SidebarGroupLabel key={group.group_title}>
                       {group.group_title}
@@ -41,7 +41,7 @@ function AppSidebar() {
                       </SidebarMenuButton>
                     </SidebarMenuItem>
                   ))}
-                </>
+                </React.Fragment>
               ))}
             </SidebarMenu>
           </SidebarGroupContent>

@@ -11,9 +11,11 @@ export const Route = createFileRoute("/_auth")({
 // TODO: Use js-cookies to persist the sidebar state
 function RouteComponent() {
   return (
-    <SidebarProvider defaultOpen>
-      <Outlet />
-      <AppSideBar />
-    </SidebarProvider>
+    <>
+      <SidebarProvider defaultOpen>
+        <AppSideBar />
+        <Outlet />
+      </SidebarProvider>
+    </>
   );
 }
