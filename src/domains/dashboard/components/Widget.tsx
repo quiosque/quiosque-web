@@ -9,8 +9,6 @@ type WidgetProps = {
 function Widget(props: WidgetProps) {
   const { type } = props;
 
-  console.log(type);
-
   return (
     <Card key={type} className='w-full h-full'>
       <CardHeader className="flex flex-row items-center justify-start p-1 pt-1">
