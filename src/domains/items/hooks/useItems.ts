@@ -5,6 +5,7 @@ function useItems() {
   const { data, isLoading } = useQuery({
     queryKey: ["items"],
     queryFn: () => getItems(),
+    refetchInterval: 10000,
   });
 
   return {

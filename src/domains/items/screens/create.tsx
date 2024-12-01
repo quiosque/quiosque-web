@@ -5,7 +5,8 @@ import CreateItemSchema from "../utils/createSchema";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import FormInput from "../components/FormInput";
+import FormInput from "@/components/FormInput";
+import FormCombobox from "@/components/FormCombobox";
 
 function CreateItemScreen() {
   const form = useForm<z.infer<typeof CreateItemSchema>>({
@@ -14,18 +15,19 @@ function CreateItemScreen() {
       name: "",
       description: "",
       quantity: 0,
+      measure: "",
     }
   });
 
-  const onSubmit = (any: any) => {
-    console.log(any);
+  const onSubmit = (data) => {
+    console.log(data);
   };
 
   return (
     <div className="w-screen h-screen p-2 flex flex-col items-center justify-center">
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(onSubmit)}
+          onSubmit={form.handleSubmit(onSubmit, (errors) => console.log(errors))}
           className="space-y-8 max-w-4xl w-full"
         >
           <FormInput
@@ -48,7 +50,32 @@ function CreateItemScreen() {
             label="Quantidade"
             placeholder="Quantidade"
             name="quantity"
-            inputProps={{ type: "number" }}
+            inputProps={{ type: "number", min: 1 }}
+          />
+
+          <FormInput
+            control={form.control}
+            label="Quantidade mínima"
+            placeholder="Quantidade mínima"
+            description="Quantidade mínima para alerta de reposição."
+            name="quantity_min"
+            inputProps={{ type: "number", min: 1 }}
+          />
+
+          <FormCombobox
+            control={form.control}
+            label="Unidade de medida"
+            placeholder="Unidade de medida"
+            name="measure"
+            description="Defina em qual unidade de medida o item será contabilizado."
+            options={[
+              { label: "Unidade", value: "un" },
+              { label: "Quilograma", value: "kg" },
+              { label: "Litro", value: "l" },
+              { label: "Metro", value: "m" },
+              { label: "Metro quadrado", value: "m2" },
+              { label: "Metro cúbico", value: "m3" }
+            ]}
           />
 
           <Button type="submit">Finalizar</Button>
