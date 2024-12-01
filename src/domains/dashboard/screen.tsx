@@ -18,14 +18,22 @@ const GRID_LAYOUT = [
 const COLUMNS = {
   md: 9,
   sm: 6,
-  xs: 4
-}
+  xs: 4,
+};
 
 const ROW_HEIGHT = 168;
 
 function DashboardScreen() {
   return (
-    <div className="w-screen h-screen p-2">
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        flex: "1 1 0%",
+        gap: "16px",
+        padding: "16px 24px",
+      }}
+    >
       <ResponsiveGridLayout
         containerPadding={[0, 0]}
         className="layout"

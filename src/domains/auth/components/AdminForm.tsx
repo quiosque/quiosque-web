@@ -17,6 +17,7 @@ import {
   SignInContainer,
 } from "./styles";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "@tanstack/react-router";
 
 type FormInput = {
   email: string;
@@ -24,6 +25,7 @@ type FormInput = {
 };
 
 export function AdminForm() {
+  const navigate = useNavigate({ from: '/' })
   const { register, handleSubmit } = useForm<FormInput>({
     defaultValues: {
       email: "",
@@ -32,7 +34,8 @@ export function AdminForm() {
   });
 
   const onSubmit = (data: FormInput) => {
-    console.log(data);
+
+    navigate({to: "/dashboard"});
   }
 
   return (
