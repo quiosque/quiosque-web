@@ -8,11 +8,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  Control,
-  FieldPath,
-  FieldValues
-} from "react-hook-form";
+import { Control, FieldPath, FieldValues } from "react-hook-form";
 
 type FormInputProps<T extends FieldValues> = {
   control: Control<T>;
@@ -26,7 +22,14 @@ type FormInputProps<T extends FieldValues> = {
 function FormInput<T extends FieldValues>(
   props: FormInputProps<T> & InputHTMLAttributes<HTMLInputElement>
 ) {
-  const { control, label, description, placeholder, name, inputProps } = props;
+  const {
+    control,
+    label,
+    description,
+    placeholder,
+    name,
+    inputProps
+  } = props;
 
   return (
     <FormField
