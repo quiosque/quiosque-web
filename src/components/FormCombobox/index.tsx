@@ -42,7 +42,7 @@ type FormComboboxProps<T extends FieldValues> = {
   name: FieldPath<T>;
   inputProps?: InputHTMLAttributes<HTMLInputElement>;
   options: Option[];
-  onSelect?: (name: FieldPath<T>, value: string) => void;
+  onSelect?: (value: string) => void;
   emptyState?: string | React.ReactNode;
 };
 
@@ -65,7 +65,7 @@ function FormCombobox<T extends FieldValues>(
     field: ControllerRenderProps<T, Path<T> & (string | undefined)>
   ) => {
     return onSelect
-      ? onSelect(name, option.value)
+      ? onSelect(option.value)
       : field.onChange(option.value);
   };
 

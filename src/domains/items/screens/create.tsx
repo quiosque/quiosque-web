@@ -7,27 +7,35 @@ import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import FormInput from "@/components/FormInput";
 import FormCombobox from "@/components/FormCombobox";
+import useItemMutation from "../hooks/useItemMutation";
+import { currencyToNumber } from "@/formatters";
 
 function CreateItemScreen() {
+  const { mutate } = useItemMutation();
   const form = useForm<z.infer<typeof CreateItemSchema>>({
     resolver: zodResolver(CreateItemSchema),
     defaultValues: {
       name: "",
       description: "",
-      quantity: 0,
+      quantity: 1,
       measure: "",
-    }
+      cost: "R$ 0,00",
+    },
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = (data: z.infer<typeof CreateItemSchema>) => {
+    const formattedData = { ...data, cost: currencyToNumber(data.cost) };
+
+    mutate(formattedData);
   };
 
   return (
     <div className="w-screen h-screen p-2 flex flex-col items-center justify-center">
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(onSubmit, (errors) => console.log(errors))}
+          onSubmit={form.handleSubmit(onSubmit, (fieldValidationErrors) =>
+            console.log(fieldValidationErrors)
+          )}
           className="space-y-8 max-w-4xl w-full"
         >
           <FormInput
@@ -62,6 +70,15 @@ function CreateItemScreen() {
             inputProps={{ type: "number", min: 1 }}
           />
 
+          <FormInput
+            control={form.control}
+            label="Custo unitário"
+            placeholder="R$ 0,00"
+            description="Custo de cada unidade do item."
+            name="cost"
+            inputProps={{ type: "currency" }}
+          />
+
           <FormCombobox
             control={form.control}
             label="Unidade de medida"
@@ -74,7 +91,7 @@ function CreateItemScreen() {
               { label: "Litro", value: "l" },
               { label: "Metro", value: "m" },
               { label: "Metro quadrado", value: "m2" },
-              { label: "Metro cúbico", value: "m3" }
+              { label: "Metro cúbico", value: "m3" },
             ]}
           />
 

@@ -25,7 +25,7 @@ type FormInput = {
 };
 
 export function AdminForm() {
-  const navigate = useNavigate({ from: '/' })
+  const navigate = useNavigate({ from: "/" });
   const { register, handleSubmit } = useForm<FormInput>({
     defaultValues: {
       email: "",
@@ -34,9 +34,8 @@ export function AdminForm() {
   });
 
   const onSubmit = (data: FormInput) => {
-
-    navigate({to: "/dashboard"});
-  }
+    navigate({ to: "/dashboard" });
+  };
 
   return (
     <Card className="flex flex-col items-start">
