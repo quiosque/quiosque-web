@@ -12,6 +12,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { Link, useNavigate } from '@tanstack/react-router'
+
 
 export const columns: ColumnDef<Item>[] = [
   {
@@ -57,7 +59,7 @@ export const columns: ColumnDef<Item>[] = [
   {
     id: "actions",
     cell: ({row}) => {
-      // const item = row.original
+      const rowId = row.original.id
 
       return (
         <DropdownMenu>
@@ -68,9 +70,11 @@ export const columns: ColumnDef<Item>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Ações</DropdownMenuLabel>
+              <DropdownMenuLabel>Ações</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Editar</DropdownMenuItem>
+            <Link to={`/items/edit/${rowId}`}>
+              <DropdownMenuItem>Editar</DropdownMenuItem>
+            </Link>
             <DropdownMenuItem className='text-red-600'>Deletar</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

@@ -7,27 +7,41 @@ import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import FormInput from "@/components/FormInput";
 import FormCombobox from "@/components/FormCombobox";
-import { useCreateItemMutation } from "../hooks";
-import { currencyToNumber } from "@/formatters";
+import { useEditItemMutation, useItemDetails } from "../hooks";
+import { currencyFormat, currencyToNumber } from "@/formatters";
+import { useParams } from "@tanstack/react-router";
+import { Skeleton } from "@/components/ui/skeleton";
 
-function CreateItemScreen() {
-  const { mutate } = useCreateItemMutation();
+function EditItemScreen() {
+  const { itemId } = useParams({ strict: false });
+  const { mutate } = useEditItemMutation();
+  const { data, isLoading } = useItemDetails(Number(itemId));
+
+  const defaultValues = {
+      name: data.name,
+      description: data.description,
+      quantity: data.quantity,
+      quantity_min: data.quantity_min,
+      cost: currencyFormat(Number(data.cost)),
+      measure: data.measure,
+  }
+
   const form = useForm<z.infer<typeof CreateItemSchema>>({
     resolver: zodResolver(CreateItemSchema),
-    defaultValues: {
-      name: "",
-      description: "",
-      quantity: 1,
-      measure: "",
-      cost: "R$ 0,00",
-    },
+    values: defaultValues,
   });
 
   const onSubmit = (data: z.infer<typeof CreateItemSchema>) => {
-    const formattedData = { ...data, cost: currencyToNumber(data.cost) };
+    const formattedData = {
+      ...data,
+      cost: currencyToNumber(data.cost),
+      id: Number(itemId),
+    };
 
     mutate(formattedData);
   };
+
+  if (isLoading) return <Skeleton className="h-full w-full" />;
 
   return (
     <div className="w-screen h-screen p-2 flex flex-col items-center justify-center">
@@ -86,12 +100,12 @@ function CreateItemScreen() {
             name="measure"
             description="Defina em qual unidade de medida o item será contabilizado."
             options={[
-              { label: "Unidade", value: "un" },
-              { label: "Quilograma", value: "kg" },
-              { label: "Litro", value: "l" },
-              { label: "Metro", value: "m" },
-              { label: "Metro quadrado", value: "m2" },
-              { label: "Metro cúbico", value: "m3" },
+              { label: "Unidade", value: "UN" },
+              { label: "Quilograma", value: "KG" },
+              { label: "Litro", value: "L" },
+              { label: "Metro", value: "M" },
+              { label: "Metro quadrado", value: "M2" },
+              { label: "Metro cúbico", value: "M3" },
             ]}
           />
 
@@ -102,4 +116,4 @@ function CreateItemScreen() {
   );
 }
 
-export default CreateItemScreen;
+export default EditItemScreen;

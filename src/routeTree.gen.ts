@@ -16,6 +16,7 @@ import { Route as AuthImport } from './routes/_auth'
 import { Route as AuthDashboardImport } from './routes/_auth.dashboard'
 import { Route as AuthItemsListImport } from './routes/_auth.items.list'
 import { Route as AuthItemsCreateImport } from './routes/_auth.items.create'
+import { Route as AuthItemsEditItemIdImport } from './routes/_auth.items.edit.$itemId'
 
 // Create/Update Routes
 
@@ -45,6 +46,12 @@ const AuthItemsListRoute = AuthItemsListImport.update({
 const AuthItemsCreateRoute = AuthItemsCreateImport.update({
   id: '/items/create',
   path: '/items/create',
+  getParentRoute: () => AuthRoute,
+} as any)
+
+const AuthItemsEditItemIdRoute = AuthItemsEditItemIdImport.update({
+  id: '/items/edit/$itemId',
+  path: '/items/edit/$itemId',
   getParentRoute: () => AuthRoute,
 } as any)
 
@@ -87,6 +94,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthItemsListImport
       parentRoute: typeof AuthImport
     }
+    '/_auth/items/edit/$itemId': {
+      id: '/_auth/items/edit/$itemId'
+      path: '/items/edit/$itemId'
+      fullPath: '/items/edit/$itemId'
+      preLoaderRoute: typeof AuthItemsEditItemIdImport
+      parentRoute: typeof AuthImport
+    }
   }
 }
 
@@ -96,12 +110,14 @@ interface AuthRouteChildren {
   AuthDashboardRoute: typeof AuthDashboardRoute
   AuthItemsCreateRoute: typeof AuthItemsCreateRoute
   AuthItemsListRoute: typeof AuthItemsListRoute
+  AuthItemsEditItemIdRoute: typeof AuthItemsEditItemIdRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
   AuthDashboardRoute: AuthDashboardRoute,
   AuthItemsCreateRoute: AuthItemsCreateRoute,
   AuthItemsListRoute: AuthItemsListRoute,
+  AuthItemsEditItemIdRoute: AuthItemsEditItemIdRoute,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
@@ -112,6 +128,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthDashboardRoute
   '/items/create': typeof AuthItemsCreateRoute
   '/items/list': typeof AuthItemsListRoute
+  '/items/edit/$itemId': typeof AuthItemsEditItemIdRoute
 }
 
 export interface FileRoutesByTo {
@@ -120,6 +137,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof AuthDashboardRoute
   '/items/create': typeof AuthItemsCreateRoute
   '/items/list': typeof AuthItemsListRoute
+  '/items/edit/$itemId': typeof AuthItemsEditItemIdRoute
 }
 
 export interface FileRoutesById {
@@ -129,13 +147,26 @@ export interface FileRoutesById {
   '/_auth/dashboard': typeof AuthDashboardRoute
   '/_auth/items/create': typeof AuthItemsCreateRoute
   '/_auth/items/list': typeof AuthItemsListRoute
+  '/_auth/items/edit/$itemId': typeof AuthItemsEditItemIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/login' | '/dashboard' | '/items/create' | '/items/list'
+  fullPaths:
+    | ''
+    | '/login'
+    | '/dashboard'
+    | '/items/create'
+    | '/items/list'
+    | '/items/edit/$itemId'
   fileRoutesByTo: FileRoutesByTo
-  to: '' | '/login' | '/dashboard' | '/items/create' | '/items/list'
+  to:
+    | ''
+    | '/login'
+    | '/dashboard'
+    | '/items/create'
+    | '/items/list'
+    | '/items/edit/$itemId'
   id:
     | '__root__'
     | '/_auth'
@@ -143,6 +174,7 @@ export interface FileRouteTypes {
     | '/_auth/dashboard'
     | '/_auth/items/create'
     | '/_auth/items/list'
+    | '/_auth/items/edit/$itemId'
   fileRoutesById: FileRoutesById
 }
 
@@ -175,7 +207,8 @@ export const routeTree = rootRoute
       "children": [
         "/_auth/dashboard",
         "/_auth/items/create",
-        "/_auth/items/list"
+        "/_auth/items/list",
+        "/_auth/items/edit/$itemId"
       ]
     },
     "/login": {
@@ -191,6 +224,10 @@ export const routeTree = rootRoute
     },
     "/_auth/items/list": {
       "filePath": "_auth.items.list.tsx",
+      "parent": "/_auth"
+    },
+    "/_auth/items/edit/$itemId": {
+      "filePath": "_auth.items.edit.$itemId.tsx",
       "parent": "/_auth"
     }
   }
