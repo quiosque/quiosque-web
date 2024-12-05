@@ -7,7 +7,10 @@ const createItem = async (data: Item) => {
   try {
     const { data: response } = await httpClient.post(
       `${endpoint}`,
-      data
+      {
+        ...data,
+        store_id: 1
+      }
     )
 
     return response;
