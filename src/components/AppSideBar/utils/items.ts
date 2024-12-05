@@ -1,4 +1,4 @@
-import { ChartLine, LucideIcon, Package, PackageOpen } from "lucide-react";
+import { ChartLine, LucideIcon, PackagePlus, PackageOpen, ShoppingBag, Plus } from "lucide-react";
 
 export type MenuGroupItem = {
   title: string;
@@ -32,8 +32,23 @@ export const MENU_GROUP_ITEMS: Array<MenuGroup> = [
       {
         title: "Cadastrar item",
         url: "/items/create",
-        icon: Package,
+        icon: PackagePlus,
       },
     ],
   },
+  {
+    group_title: "Produtos",
+    items: [
+      {
+        title: "Listar produtos",
+        url: "/products/list",
+        icon: ShoppingBag,
+      },
+      {
+        title: "Cadastrar produto",
+        url: "/products/create",
+        icon: Plus,
+      },
+    ],
+  }
 ];
