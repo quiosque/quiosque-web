@@ -75,7 +75,6 @@ function FormCombobox<T extends FieldValues>(
       name={name}
       render={({ field }) => (
         <FormItem className="flex flex-col">
-          {console.log('lol', control._formValues)}
           <FormLabel>{label}</FormLabel>
           <Popover>
             <PopoverTrigger asChild>
