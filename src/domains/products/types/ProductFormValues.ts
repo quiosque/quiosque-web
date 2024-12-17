@@ -1,5 +1,5 @@
 type ProductFormValues = {
-  id?: number;
+  id?: number | null;
   category_id: number | null;
   store_id: number;
   name: string;

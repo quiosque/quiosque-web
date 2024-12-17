@@ -1,4 +1,11 @@
-import { ChartLine, LucideIcon, PackagePlus, PackageOpen, ShoppingBag, Plus } from "lucide-react";
+import {
+  ChartLine,
+  LucideIcon,
+  PackagePlus,
+  PackageOpen,
+  ShoppingBag,
+  Plus,
+} from "lucide-react";
 
 export type MenuGroupItem = {
   title: string;
@@ -50,5 +57,15 @@ export const MENU_GROUP_ITEMS: Array<MenuGroup> = [
         icon: Plus,
       },
     ],
-  }
+  },
+  {
+    group_title: "Financeiro",
+    items: [
+      {
+        title: "Relatório de vendas",
+        url: "/sales/list",
+        icon: ChartLine,
+      },
+    ],
+  },
 ];
