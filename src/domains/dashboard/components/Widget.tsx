@@ -14,7 +14,7 @@ type WidgetProps = {
 
 const titles: Record<WidgetType, React.ReactNode> = {
   productsColumns: "Produtos",
-  salesByMonth: "Vendas deste ano:",
+  salesByMonth: "Vendas mensais:",
   productCard: (
     <div className="flex-1 flex align-center justify-between">
       <h3 className="text-sm">O produto mais vendido:</h3>

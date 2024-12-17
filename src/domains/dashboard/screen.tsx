@@ -3,14 +3,23 @@ import { Responsive, WidthProvider } from "react-grid-layout";
 import Widget from "./components/Widget";
 import "react-grid-layout/css/styles.css";
 
+type WidgetType = 'productsColumns' | 'salesByMonth' | 'productCard' | 'itemCard';
+
+type GridLayoutType = {
+  i: WidgetType;
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}[]
+
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const BREAKPOINTS = { md: 1920, sm: 1366, xs: 1200 };
 
-const GRID_LAYOUT = [
+const GRID_LAYOUT: GridLayoutType = [
   { i: "salesByMonth", x: 0, y: 0, w: 3, h: 2 },
   { i: "productsColumns", x: 4, y: 0, w: 3, h: 2 },
-  { i: "best-salles", x: 0, y: 4, w: 3, h: 2 },
   { i: "productCard", x: 4, y: 4, w: 1, h: 1 },
   { i: "itemCard", x: 6, y: 4, w: 1, h: 1 },
 ];

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { MENU_GROUP_ITEMS } from "./utils/items";
 import {
   Sidebar,
@@ -15,11 +15,20 @@ import QuiosqueLogo from "@/assets/quiosque.svg";
 import { Logo, LogoLink } from "./styles";
 
 function AppSidebar() {
+  const [currentRoute, setCurrentRoute] = useState(window.location.href);
+
+  const getStyle = (url: string) => ({
+    backgroundColor: currentRoute.includes(url)
+      ? "rgba(0, 0, 0, 0.1)"
+      : "transparent",
+    borderRadius: 4,
+  });
+
   return (
     <Sidebar>
       <SidebarContent>
-        <SidebarGroup className='gap-6'>
-          <LogoLink to='/dashboard'>
+        <SidebarGroup className="gap-6">
+          <LogoLink to="/dashboard">
             <Logo src={QuiosqueLogo} alt="Quiosque Inc." />
           </LogoLink>
           <SidebarGroupContent>
@@ -32,9 +41,12 @@ function AppSidebar() {
                     </SidebarGroupLabel>
                   )}
                   {group.items.map((item) => (
-                    <SidebarMenuItem key={item.title}>
+                    <SidebarMenuItem
+                      key={item.title}
+                      style={getStyle(item.url)}
+                    >
                       <SidebarMenuButton asChild>
-                        <Link to={item.url}>
+                        <Link to={item.url} onClick={() => setCurrentRoute(item.url)}>
                           <item.icon />
                           <span>{item.title}</span>
                         </Link>

@@ -15,7 +15,12 @@ const getDashData = async (): Promise<DashData> => {
   } catch(error) {
     console.error(error)
 
-    return {}
+    return {
+      totalItemCost: 0,
+      totalExpensesCost: 0,
+      totalSales: 0,
+      salesByMonth: []
+    }
   }
 }
 

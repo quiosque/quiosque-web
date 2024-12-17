@@ -288,7 +288,7 @@ function ItemsTable(props: TableItemsProps) {
                     colSpan={columns.length}
                     className="h-24 text-center"
                   >
-                    No results.
+                    Sem resultados.
                   </TableCell>
                 </TableRow>
               )}
@@ -298,7 +298,7 @@ function ItemsTable(props: TableItemsProps) {
         <div className="flex items-center justify-end space-x-2 py-4">
           <div className="flex-1 text-sm text-muted-foreground">
             {table.getFilteredSelectedRowModel().rows.length} of{" "}
-            {table.getFilteredRowModel().rows.length} row(s) selected.
+            {table.getFilteredRowModel().rows.length} items selecionados.
           </div>
           <div className="space-x-2">
             <Button
@@ -307,7 +307,7 @@ function ItemsTable(props: TableItemsProps) {
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
             >
-              Previous
+              Anterior
             </Button>
             <Button
               variant="outline"
@@ -315,7 +315,7 @@ function ItemsTable(props: TableItemsProps) {
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
             >
-              Next
+              Próximo
             </Button>
           </div>
         </div>

@@ -19,6 +19,7 @@ function CreateItemScreen() {
   const form = useForm<z.infer<typeof CreateProductSchema>>({
     resolver: zodResolver(CreateProductSchema),
     defaultValues: {
+      id: null,
       name: "",
       description: "",
       price: "R$ 0,00",
@@ -30,6 +31,7 @@ function CreateItemScreen() {
   const onSubmit = (data: z.infer<typeof CreateProductSchema>) => {
     const formattedData = {
       ...data,
+      id: null,
       price: currencyToNumber(data.price),
     };
 
