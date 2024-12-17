@@ -14,8 +14,11 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as LoginImport } from './routes/login'
 import { Route as AuthImport } from './routes/_auth'
 import { Route as AuthDashboardImport } from './routes/_auth.dashboard'
+import { Route as AuthProductsListImport } from './routes/_auth.products.list'
+import { Route as AuthProductsCreateImport } from './routes/_auth.products.create'
 import { Route as AuthItemsListImport } from './routes/_auth.items.list'
 import { Route as AuthItemsCreateImport } from './routes/_auth.items.create'
+import { Route as AuthProductsEditProductIdImport } from './routes/_auth.products.edit.$productId'
 import { Route as AuthItemsEditItemIdImport } from './routes/_auth.items.edit.$itemId'
 
 // Create/Update Routes
@@ -37,6 +40,18 @@ const AuthDashboardRoute = AuthDashboardImport.update({
   getParentRoute: () => AuthRoute,
 } as any)
 
+const AuthProductsListRoute = AuthProductsListImport.update({
+  id: '/products/list',
+  path: '/products/list',
+  getParentRoute: () => AuthRoute,
+} as any)
+
+const AuthProductsCreateRoute = AuthProductsCreateImport.update({
+  id: '/products/create',
+  path: '/products/create',
+  getParentRoute: () => AuthRoute,
+} as any)
+
 const AuthItemsListRoute = AuthItemsListImport.update({
   id: '/items/list',
   path: '/items/list',
@@ -46,6 +61,12 @@ const AuthItemsListRoute = AuthItemsListImport.update({
 const AuthItemsCreateRoute = AuthItemsCreateImport.update({
   id: '/items/create',
   path: '/items/create',
+  getParentRoute: () => AuthRoute,
+} as any)
+
+const AuthProductsEditProductIdRoute = AuthProductsEditProductIdImport.update({
+  id: '/products/edit/$productId',
+  path: '/products/edit/$productId',
   getParentRoute: () => AuthRoute,
 } as any)
 
@@ -94,11 +115,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthItemsListImport
       parentRoute: typeof AuthImport
     }
+    '/_auth/products/create': {
+      id: '/_auth/products/create'
+      path: '/products/create'
+      fullPath: '/products/create'
+      preLoaderRoute: typeof AuthProductsCreateImport
+      parentRoute: typeof AuthImport
+    }
+    '/_auth/products/list': {
+      id: '/_auth/products/list'
+      path: '/products/list'
+      fullPath: '/products/list'
+      preLoaderRoute: typeof AuthProductsListImport
+      parentRoute: typeof AuthImport
+    }
     '/_auth/items/edit/$itemId': {
       id: '/_auth/items/edit/$itemId'
       path: '/items/edit/$itemId'
       fullPath: '/items/edit/$itemId'
       preLoaderRoute: typeof AuthItemsEditItemIdImport
+      parentRoute: typeof AuthImport
+    }
+    '/_auth/products/edit/$productId': {
+      id: '/_auth/products/edit/$productId'
+      path: '/products/edit/$productId'
+      fullPath: '/products/edit/$productId'
+      preLoaderRoute: typeof AuthProductsEditProductIdImport
       parentRoute: typeof AuthImport
     }
   }
@@ -110,14 +152,20 @@ interface AuthRouteChildren {
   AuthDashboardRoute: typeof AuthDashboardRoute
   AuthItemsCreateRoute: typeof AuthItemsCreateRoute
   AuthItemsListRoute: typeof AuthItemsListRoute
+  AuthProductsCreateRoute: typeof AuthProductsCreateRoute
+  AuthProductsListRoute: typeof AuthProductsListRoute
   AuthItemsEditItemIdRoute: typeof AuthItemsEditItemIdRoute
+  AuthProductsEditProductIdRoute: typeof AuthProductsEditProductIdRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
   AuthDashboardRoute: AuthDashboardRoute,
   AuthItemsCreateRoute: AuthItemsCreateRoute,
   AuthItemsListRoute: AuthItemsListRoute,
+  AuthProductsCreateRoute: AuthProductsCreateRoute,
+  AuthProductsListRoute: AuthProductsListRoute,
   AuthItemsEditItemIdRoute: AuthItemsEditItemIdRoute,
+  AuthProductsEditProductIdRoute: AuthProductsEditProductIdRoute,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
@@ -128,7 +176,10 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthDashboardRoute
   '/items/create': typeof AuthItemsCreateRoute
   '/items/list': typeof AuthItemsListRoute
+  '/products/create': typeof AuthProductsCreateRoute
+  '/products/list': typeof AuthProductsListRoute
   '/items/edit/$itemId': typeof AuthItemsEditItemIdRoute
+  '/products/edit/$productId': typeof AuthProductsEditProductIdRoute
 }
 
 export interface FileRoutesByTo {
@@ -137,7 +188,10 @@ export interface FileRoutesByTo {
   '/dashboard': typeof AuthDashboardRoute
   '/items/create': typeof AuthItemsCreateRoute
   '/items/list': typeof AuthItemsListRoute
+  '/products/create': typeof AuthProductsCreateRoute
+  '/products/list': typeof AuthProductsListRoute
   '/items/edit/$itemId': typeof AuthItemsEditItemIdRoute
+  '/products/edit/$productId': typeof AuthProductsEditProductIdRoute
 }
 
 export interface FileRoutesById {
@@ -147,7 +201,10 @@ export interface FileRoutesById {
   '/_auth/dashboard': typeof AuthDashboardRoute
   '/_auth/items/create': typeof AuthItemsCreateRoute
   '/_auth/items/list': typeof AuthItemsListRoute
+  '/_auth/products/create': typeof AuthProductsCreateRoute
+  '/_auth/products/list': typeof AuthProductsListRoute
   '/_auth/items/edit/$itemId': typeof AuthItemsEditItemIdRoute
+  '/_auth/products/edit/$productId': typeof AuthProductsEditProductIdRoute
 }
 
 export interface FileRouteTypes {
@@ -158,7 +215,10 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/items/create'
     | '/items/list'
+    | '/products/create'
+    | '/products/list'
     | '/items/edit/$itemId'
+    | '/products/edit/$productId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | ''
@@ -166,7 +226,10 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/items/create'
     | '/items/list'
+    | '/products/create'
+    | '/products/list'
     | '/items/edit/$itemId'
+    | '/products/edit/$productId'
   id:
     | '__root__'
     | '/_auth'
@@ -174,7 +237,10 @@ export interface FileRouteTypes {
     | '/_auth/dashboard'
     | '/_auth/items/create'
     | '/_auth/items/list'
+    | '/_auth/products/create'
+    | '/_auth/products/list'
     | '/_auth/items/edit/$itemId'
+    | '/_auth/products/edit/$productId'
   fileRoutesById: FileRoutesById
 }
 
@@ -208,7 +274,10 @@ export const routeTree = rootRoute
         "/_auth/dashboard",
         "/_auth/items/create",
         "/_auth/items/list",
-        "/_auth/items/edit/$itemId"
+        "/_auth/products/create",
+        "/_auth/products/list",
+        "/_auth/items/edit/$itemId",
+        "/_auth/products/edit/$productId"
       ]
     },
     "/login": {
@@ -226,8 +295,20 @@ export const routeTree = rootRoute
       "filePath": "_auth.items.list.tsx",
       "parent": "/_auth"
     },
+    "/_auth/products/create": {
+      "filePath": "_auth.products.create.tsx",
+      "parent": "/_auth"
+    },
+    "/_auth/products/list": {
+      "filePath": "_auth.products.list.tsx",
+      "parent": "/_auth"
+    },
     "/_auth/items/edit/$itemId": {
       "filePath": "_auth.items.edit.$itemId.tsx",
+      "parent": "/_auth"
+    },
+    "/_auth/products/edit/$productId": {
+      "filePath": "_auth.products.edit.$productId.tsx",
       "parent": "/_auth"
     }
   }

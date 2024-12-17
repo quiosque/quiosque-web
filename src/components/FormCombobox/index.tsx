@@ -32,7 +32,7 @@ import { cn } from "@/lib/utils";
 import { Check, ChevronsUpDown } from "lucide-react";
 
 // TODO - Move types to a specific module
-type Option = { label: string; value: string };
+type Option = { label: string; value: string | number };
 
 type FormComboboxProps<T extends FieldValues> = {
   control: Control<T>;
@@ -42,7 +42,7 @@ type FormComboboxProps<T extends FieldValues> = {
   name: FieldPath<T>;
   inputProps?: InputHTMLAttributes<HTMLInputElement>;
   options: Option[];
-  onSelect?: (value: string) => void;
+  onSelect?: (value: string | number) => void;
   emptyState?: string | React.ReactNode;
 };
 
@@ -75,6 +75,7 @@ function FormCombobox<T extends FieldValues>(
       name={name}
       render={({ field }) => (
         <FormItem className="flex flex-col">
+          {console.log('lol', control._formValues)}
           <FormLabel>{label}</FormLabel>
           <Popover>
             <PopoverTrigger asChild>
@@ -95,7 +96,7 @@ function FormCombobox<T extends FieldValues>(
                 </Button>
               </FormControl>
             </PopoverTrigger>
-            <PopoverContent className="w-full p-0">
+            <PopoverContent className="w-full p-0" align="start">
               <Command>
                 <CommandInput placeholder={placeholder} />
                 <CommandList>
