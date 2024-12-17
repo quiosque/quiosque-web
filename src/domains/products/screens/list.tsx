@@ -1,8 +1,8 @@
 import React from "react";
 import { DataTable } from "@/components/DataTable";
-import { useItems } from "../hooks";
+import { useProducts } from "../hooks";
 import { ColumnDef } from "@tanstack/react-table";
-import { Item } from "../types";
+
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
 
@@ -15,12 +15,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Link } from "@tanstack/react-router";
-import { deleteItem } from "../services";
+import { ProductsTableData } from "../types";
+import { deleteProduct } from "../services";
 
-function ListItemsScreen() {
-  const { data, isLoading, refetch } = useItems();
+function ListProductsScreen() {
+  const { data, isLoading, handleRefetch } = useProducts();
   // Move this to another file, where hooks can be accessed
-  const columns: ColumnDef<Item>[] = [
+  const columns: ColumnDef<ProductsTableData>[] = [
     {
       accessorKey: "id",
       header: "ID",
@@ -34,31 +35,17 @@ function ListItemsScreen() {
       header: "Descrição",
     },
     {
-      accessorKey: "quantity",
-      header: "Quantidade",
+      accessorKey: "category",
+      header: "Categoria",
     },
     {
-      accessorKey: "measure",
-      header: "Unidade de medida",
-    },
-    {
-      accessorKey: "cost",
-      header: "Custo por unidade",
+      accessorKey: "price",
+      header: "Preço de comercialização",
       cell: ({ row }) => {
         return new Intl.NumberFormat("pt-BR", {
           style: "currency",
           currency: "BRL",
-        }).format(row.original.cost);
-      },
-    },
-    {
-      accessorKey: "totalCost",
-      header: "Custo total",
-      cell: ({ row }) => {
-        return new Intl.NumberFormat("pt-BR", {
-          style: "currency",
-          currency: "BRL",
-        }).format(row.original.totalCost);
+        }).format(row.original.price);
       },
     },
     {
@@ -69,8 +56,8 @@ function ListItemsScreen() {
         if (!rowId) return null;
 
         const handleDelete = async () => {
-          await deleteItem(rowId);
-          refetch();
+          await deleteProduct(rowId);
+          handleRefetch();
         }
 
         return (
@@ -84,7 +71,7 @@ function ListItemsScreen() {
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Ações</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <Link to={`/items/edit/${rowId}`}>
+              <Link to={`/products/edit/${rowId}`}>
                 <DropdownMenuItem>Editar</DropdownMenuItem>
               </Link>
               <DropdownMenuItem
@@ -107,4 +94,4 @@ function ListItemsScreen() {
   );
 }
 
-export default ListItemsScreen;
+export default ListProductsScreen;

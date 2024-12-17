@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Control, FieldPath, FieldValues } from "react-hook-form";
-import { Skeleton } from "../ui/skeleton";
 
 type FormInputProps<T extends FieldValues> = {
   control: Control<T>;

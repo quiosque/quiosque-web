@@ -1,9 +1,9 @@
 import httpClient from "@/infrastructure/axios";
-import { Item } from "../types";
+import { ProductFormValues } from "../types";
 
-const endpoint: string = "/Item";
+const endpoint: string = "/Product";
 
-const createItem = async (data: Item) => {
+const createProduct = async (data: Omit<ProductFormValues, "store_id">) => {
   try {
     const { data: response } = await httpClient.post(
       `${endpoint}`,
@@ -21,4 +21,4 @@ const createItem = async (data: Item) => {
   }
 };
 
-export default createItem;
+export default createProduct;

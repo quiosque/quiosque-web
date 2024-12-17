@@ -15,7 +15,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
-import { DataTableProps } from "../types";
+import { DataTableProps } from "@/types/DataTableProps";
 
 // TODO: Do a better composition of the DataTable component
 export function DataTable<TData, TValue>({
