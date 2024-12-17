@@ -8,8 +8,8 @@ const ResponsiveGridLayout = WidthProvider(Responsive);
 const BREAKPOINTS = { md: 1920, sm: 1366, xs: 1200 };
 
 const GRID_LAYOUT = [
-  { i: "lineChart", x: 0, y: 0, w: 3, h: 2 },
-  { i: "collumnsChart", x: 4, y: 0, w: 3, h: 2 },
+  { i: "salesByMonth", x: 0, y: 0, w: 3, h: 2 },
+  { i: "productsColumns", x: 4, y: 0, w: 3, h: 2 },
   { i: "best-salles", x: 0, y: 4, w: 3, h: 2 },
   { i: "productCard", x: 4, y: 4, w: 1, h: 1 },
   { i: "itemCard", x: 6, y: 4, w: 1, h: 1 },
