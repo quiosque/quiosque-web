@@ -29,20 +29,7 @@ const TYPE_UNITS_OPTIONS = [
 function EditExpenseScreen() {
   const { mutate } = useEditExpenseMutation();
   const { expenseId } = useParams({ strict: false });
-  const { data, isLoading } = useExpenseDetails(Number(expenseId));
-
-  const defaultValues = {
-    name: data.name,
-    description: data.description,
-    cost: currencyFormat(Number(data.cost)),
-    type: data.type,
-    recurrency: data.recurrency,
-  };
-
-  const form = useForm<z.infer<typeof CreateExpenseSchema>>({
-    resolver: zodResolver(CreateExpenseSchema),
-    defaultValues: defaultValues,
-  });
+  const { form, isLoading } = useExpenseDetails(Number(expenseId));
 
   const onSubmit = (data: z.infer<typeof CreateExpenseSchema>) => {
     const formattedData = {
