@@ -30,8 +30,6 @@ function useDashData() {
     refetchInterval: 4000,
   });
 
-  console.log('dashData', dashData);
-
   const data = useMemo(() => serializeData(itemsData, dashData, salesData), [dashData, itemsData, salesData]);
 
   return {

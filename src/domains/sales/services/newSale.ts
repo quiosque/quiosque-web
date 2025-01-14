@@ -14,10 +14,14 @@ const newSale = async (data: Sale) => {
     )
 
     return response;
-  } catch (error) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
     console.error(error);
 
-    throw new Error();
+    if (error?.response) {
+      const message = error.response.data?.message || "Erro ao realizar a venda";
+      throw new Error(message);
+    }
   }
 };
 
