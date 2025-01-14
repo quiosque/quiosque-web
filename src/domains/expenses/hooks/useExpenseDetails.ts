@@ -1,13 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
 import getExpenseDetails from "../services/getExpenseById";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
+import { currencyFormat } from "@/formatters";
+import { useForm } from "react-hook-form";
+import CreateExpenseSchema from "../utils/createSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
 const DEFAULT_EXPENSE_DATA = {
   name: "",
   description: "",
   type: "",
   recurrency: "",
-  cost: "R$ 0,00",
+  cost: "R$ 0",
 };
 
 function useExpenseDetails(id: number) {
@@ -16,14 +21,34 @@ function useExpenseDetails(id: number) {
     queryFn: () => getExpenseDetails(id),
   });
 
-  const details = useMemo(
-    () => (data ?? DEFAULT_EXPENSE_DATA),
+  const defaultValues = useMemo(
+    () =>
+      data
+        ? {
+            name: data.name,
+            description: data.description,
+            cost: currencyFormat(Number(data.cost)),
+            type: data.type,
+            recurrency: data.recurrency,
+          }
+        : DEFAULT_EXPENSE_DATA,
     [data]
   );
 
+  const form = useForm<z.infer<typeof CreateExpenseSchema>>({
+    resolver: zodResolver(CreateExpenseSchema),
+    defaultValues,
+  });
+
+  useEffect(() => {
+    if (data) {
+      form.reset(defaultValues);
+    }
+  }, [data, form, defaultValues]);
+
   return {
-    data: details,
-    isLoading
+    form,
+    isLoading,
   };
 }
 

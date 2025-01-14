@@ -24,7 +24,7 @@ function formatData(data) {
 
   return Object.entries(groupedData).map(([type, totalCost]) => ({
     type,
-    totalCost
+    Custo: totalCost
   }));
 }
 
@@ -57,7 +57,7 @@ function ExpensesCollumnsChartComponent() {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="totalCost" fill="#8884d8" />
+        <Bar dataKey="Custo" fill="#8884d8" />
       </BarChart>
     </div>
   );
