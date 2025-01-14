@@ -9,15 +9,35 @@ import {
   Legend,
 } from "recharts";
 
+const monthNames = [
+  "Jan",
+  "Fev",
+  "Mar",
+  "Abr",
+  "Mai",
+  "Jun",
+  "Jul",
+  "Ago",
+  "Set",
+  "Out",
+  "Nov",
+  "Dez",
+];
 
-const monthNames = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
-
-function LineChartComponent(props: { salesByMonth: { month: number; value: number }[] }) {
+function LineChartComponent(props: {
+  salesByMonth: { month: number; value: number }[];
+}) {
   const { salesByMonth } = props;
-  const formattedData = useMemo(() => salesByMonth.sort((a, b) => a.month - b.month).map((item) => ({
-    name: monthNames[item.month - 1],
-    Valor: item.value,
-  })), [salesByMonth]);
+  const formattedData = useMemo(
+    () =>
+      salesByMonth
+        .sort((a, b) => a.month - b.month)
+        .map((item) => ({
+          name: monthNames[item.month - 1],
+          Valor: item.value,
+        })),
+    [salesByMonth]
+  );
 
   return (
     <div className="p-0 w-full">
