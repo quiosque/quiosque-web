@@ -1,7 +1,7 @@
 import httpClient from "@/infrastructure/axios";
 import type { Sale } from "../types";
 
-const endpoint: string = "/Product";
+const endpoint: string = "/Sale";
 
 const newSale = async (data: Sale) => {
   try {

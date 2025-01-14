@@ -36,9 +36,8 @@ function ListSalesScreen() {
         return (
           <>
             {row.original.products.map((product) => (
-              <div key={product.id}>
-                <span>{product.name}</span>
-                <span> - </span>
+              <div key={product.id} className="flex items-center gap-3" >
+                <span>{product.name}:</span>
                 <span className="bg-primary text-white rounded w-4 items-center justify-center inline-flex ">{product.quantity}</span>
               </div>
             ))}

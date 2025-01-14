@@ -6,7 +6,13 @@ import { CircleDollarSign, PackageOpen } from "lucide-react";
 import useDashData from "../hooks/useDashData";
 import ProductsColumnsChartComponent from "./ProductsColumnsChartComponent";
 
-type WidgetType = 'productsColumns' | 'salesByMonth' | 'productCard' | 'itemCard';
+type WidgetType =
+  | "productsColumns"
+  | "salesByMonth"
+  | "totalExpensesCost"
+  | "totalSales"
+  | "itemsTotalCost"
+  | "expensesByCategory";
 
 type WidgetProps = {
   type: WidgetType;
@@ -15,22 +21,26 @@ type WidgetProps = {
 const titles: Record<WidgetType, React.ReactNode> = {
   productsColumns: "Produtos",
   salesByMonth: "Vendas mensais:",
-  productCard: (
+  totalExpensesCost: (
     <div className="flex-1 flex align-center justify-between">
-      <h3 className="text-sm">O produto mais vendido:</h3>
-      <CircleDollarSign strokeWidth={1}/>
+      <h3 className="text-sm">Total em despesas:</h3>
+      <CircleDollarSign strokeWidth={1} />
     </div>
   ),
-  itemCard: (
+  totalSales: (
     <div className="flex-1 flex align-center justify-between">
-      <h3 className="text-sm">O item mais utilizado:</h3>
-      <PackageOpen strokeWidth={1}/>
+      <h3 className="text-sm">Valor total das vendas:</h3>
+      <CircleDollarSign strokeWidth={1} />
     </div>
   ),
 };
 
-const WidgetCard = () => {
-  return <CardContent className="p-3"></CardContent>;
+const WidgetCard = (props: { data: number | string }) => {
+  return (
+    <CardContent className="p-3 flex flex-col items-center justify-center">
+      <h2 className="text-2xl font-bold">R$ {props.data}</h2>
+    </CardContent>
+  );
 };
 
 function Widget(props: WidgetProps) {
@@ -40,19 +50,37 @@ function Widget(props: WidgetProps) {
   const content = () => {
     switch (type) {
       case "productsColumns":
-        return <ProductsColumnsChartComponent />
+        return <ProductsColumnsChartComponent />;
       case "salesByMonth":
-        return <LineChartComponent salesByMonth={data.salesByMonth}/>;
-      case "productCard":
-        return <WidgetCard />;
+        return <LineChartComponent salesByMonth={data.salesByMonth} />;
+      case "totalExpensesCost":
+        return <WidgetCard data={data.totalExpensesCost} />;
+      case "itemsTotalCost":
+        return <WidgetCard data={data.itemsTotalCost} />;
+      case "totalSales":
+        return <WidgetCard data={data.totalSales} />;
+      // case "expensesByCategory":
+      //   return <PieChartComponent expensesByCategory={data.expensesByCategory}/>;
     }
   };
 
   return (
     <Card key={type} className="w-full h-full flex-1">
-      <CardHeader className="react-grid-dragHandle cursor-grab flex flex-row items-center justify-start p-1 pt-1 select-none text-ellipsis flex-1">
-        <GripVertical className="mt-2 hover:text-purple-500" />
-        <CardTitle className="text-base flex-1">{titles[type]}</CardTitle>
+      <CardHeader className="react-grid-dragHandle cursor-grab flex flex-row items-center justify-start p-2 pt-1 select-none text-ellipsis flex-1">
+        <GripVertical
+          className="mt-2 hover:text-purple-500"
+          style={{
+            color: "#132D42",
+          }}
+        />
+        <CardTitle
+          className="text-base flex-1"
+          style={{
+            color: "#132D42",
+          }}
+        >
+          {titles[type]}
+        </CardTitle>
       </CardHeader>
       {content()}
     </Card>

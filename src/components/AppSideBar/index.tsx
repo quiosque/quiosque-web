@@ -13,6 +13,7 @@ import {
 import { Link } from "@tanstack/react-router";
 import QuiosqueLogo from "@/assets/quiosque.svg";
 import { Logo, LogoLink } from "./styles";
+import { CreateSale } from "@/domains/sales/screens/create";
 
 function AppSidebar() {
   const [currentRoute, setCurrentRoute] = useState(window.location.href);
@@ -31,6 +32,7 @@ function AppSidebar() {
           <LogoLink to="/dashboard">
             <Logo src={QuiosqueLogo} alt="Quiosque Inc." />
           </LogoLink>
+          <CreateSale />
           <SidebarGroupContent>
             <SidebarMenu>
               {MENU_GROUP_ITEMS.map((group, index) => (

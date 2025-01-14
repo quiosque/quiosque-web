@@ -19,7 +19,7 @@ const useSaleMutation = () => {
       });
     },
     onSuccess: () => {
-      navigate({ to: "/sales/list" });
+      navigate({ to: "/dashboard" });
       toast({
         title: "Venda realizada com sucesso!",
         variant: "success",
