@@ -1,5 +1,6 @@
 import {
   ChartLine,
+  ChartBarBig,
   LucideIcon,
   PackagePlus,
   PackageOpen,
@@ -66,6 +67,16 @@ export const MENU_GROUP_ITEMS: Array<MenuGroup> = [
         url: "/sales/list",
         icon: ChartLine,
       },
+      {
+        title: "Relatório de despesas",
+        url: "/expenses/list",
+        icon: ChartBarBig,
+      },
+      {
+        title: "Cadastrar despesa",
+        url: "/expenses/create",
+        icon: Plus,
+      }
     ],
   },
 ];
