@@ -1,8 +1,11 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { MultiSelect } from "@/components/ui/multi-select";
 import { toOptions } from "@/helpers/toOptions";
 import { Label } from "@/components/ui/label";
 import ProductItem from "./ProductItem";
+import { ProductsResponse } from "@/domains/products/types";
+
+type Products = Array<ProductsResponse & { quantity: number }>;
 
 type CollectionItem = {
   id: number;
@@ -11,20 +14,35 @@ type CollectionItem = {
 };
 
 type ProductsSelectionProps = {
-  onSelect: (productsIds: string[]) => void;
+  onSelect: (value: Products) => void;
   collection: CollectionItem[];
 };
 
 const createGetProductHandler =
-  (collection: CollectionItem[]) => (productId: string) => {
+  (collection: CollectionItem[]) => (productId: number) => {
     return collection.find(
-      (product: CollectionItem) => product.id === Number(productId)
+      (product: CollectionItem) => product.id === productId
     );
   };
 
+const formatteProducts = (
+  products: CollectionItem[],
+  collection: CollectionItem[]
+) => {
+  return products.map((product) => {
+    const collectionProduct = collection.find(
+      (colProduct) => colProduct.id === product.id
+    );
+
+    return {
+      ...collectionProduct,
+      ...product,
+    };
+  });
+};
+
 export function ProductsSelection(props: ProductsSelectionProps) {
   const { onSelect, collection } = props;
-  const [productsIds, setProductsIds] = useState<string[]>([]);
   const [selectedProducts, setSelectedProducts] = useState<CollectionItem[]>(
     []
   );
@@ -32,16 +50,16 @@ export function ProductsSelection(props: ProductsSelectionProps) {
   const options = useMemo(() => toOptions(collection), [collection]);
 
   const handleSelect = (productsIds: string[]) => {
-    setProductsIds(productsIds);
     setSelectedProducts(
       productsIds.map((productId) => ({ id: Number(productId), quantity: 1 }))
     );
   };
 
   const handleRemoveItem = (productId: string) => {
-    setProductsIds(productsIds.filter((id) => id !== productId));
-    setSelectedProducts(selectedProducts.filter((product) => product.id !== Number(productId)));
-  }
+    setSelectedProducts(
+      selectedProducts.filter((product) => product.id !== Number(productId))
+    );
+  };
 
   const handleQuantityChange = (productId: string, quantity: number) => {
     setSelectedProducts(
@@ -53,16 +71,20 @@ export function ProductsSelection(props: ProductsSelectionProps) {
 
   const getProduct = createGetProductHandler(collection);
 
+  useEffect(() => {
+    onSelect(formatteProducts(selectedProducts, collection));
+  }, [selectedProducts, onSelect, collection]);
+
   return (
     <div>
       <Label>Selecione os produtos</Label>
       <MultiSelect options={options} onSelect={handleSelect} />
 
       <div>
-        {productsIds.map((productId) => (
+        {selectedProducts.map((product) => (
           <ProductItem
-            key={productId}
-            product={getProduct(productId)}
+            key={product.id}
+            product={getProduct(product.id)}
             onChange={handleQuantityChange}
             onRemove={handleRemoveItem}
           />

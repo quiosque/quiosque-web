@@ -10,7 +10,7 @@ const useSaleMutation = () => {
   const { mutate, isSuccess, isError } = useMutation({
     mutationFn: newSale,
     onError: (error) => {
-      console.log(error);
+      console.log(error.message);
       toast({
         title: "Ops, algo deu errado",
         description:
