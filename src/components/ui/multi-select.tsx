@@ -55,9 +55,6 @@ export function MultiSelect(props: MultiSelectProps) {
       </PopoverTrigger>
       <PopoverContent className="w-[480px] p-0" sticky="partial">
         <Command>
-          <CommandInput placeholder="Search framework..." />
-          <CommandEmpty>Nenhuma opção foi encontrada.</CommandEmpty>
-
           <CommandList>
             <CommandGroup>
               {options.map((option) => (

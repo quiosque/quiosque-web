@@ -5,8 +5,9 @@ import { useItems } from "@/domains/items/hooks";
 import { Item } from "@/domains/items/types";
 import { useMemo } from "react";
 import useSales from "@/domains/sales/hooks/useSales";
+import { useExpenses } from "@/domains/expenses/hooks";
 
-const serializeData = (itemsData: Item[], dashData?: DashData, salesData ) => {
+const serializeData = (itemsData: Item[], dashData?: DashData, salesData: any, expensesData: any ) => {
   const itemTotalQuantity = itemsData?.reduce((acc, item) => acc + item.quantity, 0);
 
   return {
@@ -18,6 +19,11 @@ const serializeData = (itemsData: Item[], dashData?: DashData, salesData ) => {
     ,
     totalExpensesCost: dashData?.totalExpensesCost ?? 0,
     totalSales: salesData?.reduce((acc, sale) => acc + sale.total_value, 0).toFixed(2) ?? 0,
+    expensesByCategory: expensesData?.map((item) => ({
+      name: item.name,
+      cost: item.cost,
+      type: item.type,
+    })) ?? [],
   }
 }
 
@@ -29,8 +35,9 @@ function useDashData() {
     queryFn: () => getDashData(),
     refetchInterval: 4000,
   });
+  const { data: expensesData } = useExpenses();
 
-  const data = useMemo(() => serializeData(itemsData, dashData, salesData), [dashData, itemsData, salesData]);
+  const data = useMemo(() => serializeData(itemsData, dashData, salesData, expensesData), [dashData, itemsData, salesData, expensesData]);
 
   return {
     data,
