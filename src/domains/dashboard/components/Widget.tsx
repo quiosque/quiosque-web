@@ -2,9 +2,10 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { GripVertical } from "lucide-react";
 import LineChartComponent from "./LineChart";
-import { CircleDollarSign, PackageOpen } from "lucide-react";
+import { CircleDollarSign } from "lucide-react";
 import useDashData from "../hooks/useDashData";
 import ProductsColumnsChartComponent from "./ProductsColumnsChartComponent";
+import ExpensesCollumnsChartComponent from "./ExpensesColumnsChartComponent";
 
 type WidgetType =
   | "productsColumns"
@@ -33,6 +34,7 @@ const titles: Record<WidgetType, React.ReactNode> = {
       <CircleDollarSign strokeWidth={1} />
     </div>
   ),
+  expensesByCategory: "Despesas por tipo"
 };
 
 const WidgetCard = (props: { data: number | string }) => {
@@ -59,8 +61,8 @@ function Widget(props: WidgetProps) {
         return <WidgetCard data={data.itemsTotalCost} />;
       case "totalSales":
         return <WidgetCard data={data.totalSales} />;
-      // case "expensesByCategory":
-      //   return <PieChartComponent expensesByCategory={data.expensesByCategory}/>;
+      case "expensesByCategory":
+        return <ExpensesCollumnsChartComponent />;
     }
   };
 

@@ -20,6 +20,7 @@ const BREAKPOINTS = { md: 1920, sm: 1366, xs: 1200 };
 const GRID_LAYOUT: GridLayoutType = [
   { i: "salesByMonth", x: 0, y: 0, w: 3, h: 2 },
   { i: "productsColumns", x: 4, y: 0, w: 3, h: 2 },
+  { i: "expensesByCategory", x: 4, y: 0, w: 3, h: 2 },
   { i: "totalExpensesCost", x: 4, y: 4, w: 1, h: 1 },
   { i: "totalSales", x: 5, y: 4, w: 1, h: 1 },
 ];
