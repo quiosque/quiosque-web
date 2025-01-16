@@ -4,7 +4,7 @@ import getDashData from "../services/getData";
 import { DashData } from "../types";
 import { useItems } from "@/domains/items/hooks";
 import { Item } from "@/domains/items/types";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import useSales from "@/domains/sales/hooks/useSales";
 import { useExpenses } from "@/domains/expenses/hooks";
 
