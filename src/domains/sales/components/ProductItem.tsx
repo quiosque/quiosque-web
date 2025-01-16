@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { PlusSquareIcon, MinusSquareIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 

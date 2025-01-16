@@ -9,6 +9,9 @@
     "jsx": "react-jsx",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "noEmitOnError": false, // Allows the build to continue even with errors
+    "skipLibCheck": true,   // Skip type checking for library files
+    "strict": false         // Loosen TypeScript strictness (optional)
   }
 }

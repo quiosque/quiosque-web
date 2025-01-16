@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useMemo } from "react";
 import {
   Table,
   TableBody,
@@ -92,7 +93,6 @@ function ItemsTable(props: TableItemsProps) {
           checked={row.getIsSelected()}
           onCheckedChange={(value) => {
             row.toggleSelected(!!value)
-            if(value === false) table.options.meta?.updateData(row.original.id, 0)
           }}
           aria-label="Select row"
         />

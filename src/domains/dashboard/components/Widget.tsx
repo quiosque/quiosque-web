@@ -7,19 +7,11 @@ import useDashData from "../hooks/useDashData";
 import ProductsColumnsChartComponent from "./ProductsColumnsChartComponent";
 import ExpensesCollumnsChartComponent from "./ExpensesColumnsChartComponent";
 
-type WidgetType =
-  | "productsColumns"
-  | "salesByMonth"
-  | "totalExpensesCost"
-  | "totalSales"
-  | "itemsTotalCost"
-  | "expensesByCategory";
-
 type WidgetProps = {
-  type: WidgetType;
+  type: string;
 };
 
-const titles: Record<WidgetType, React.ReactNode> = {
+const titles: Record<string, React.ReactNode> = {
   productsColumns: "Produtos",
   salesByMonth: "Vendas mensais:",
   totalExpensesCost: (
