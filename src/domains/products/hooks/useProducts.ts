@@ -17,7 +17,7 @@ const useProducts = () => {
   } = useQuery({
     queryKey: ["products"],
     queryFn: () => getProducts(),
-    refetchInterval: 10000,
+    refetchInterval: 100000,
   });
 
   const products = useMemo(() => {

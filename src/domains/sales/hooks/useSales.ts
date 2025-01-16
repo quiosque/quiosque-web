@@ -5,7 +5,7 @@ function useSales() {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["sales"],
     queryFn: () => getSales(),
-    refetchInterval: 10000,
+    refetchInterval: 100000,
   });
 
   return {

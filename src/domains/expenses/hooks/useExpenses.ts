@@ -5,7 +5,7 @@ function useExpenses() {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["expenses"],
     queryFn: () => getExpenses(),
-    refetchInterval: 10000,
+    refetchInterval: 100000,
   });
 
   return {
