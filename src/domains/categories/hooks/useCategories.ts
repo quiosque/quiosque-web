@@ -6,7 +6,7 @@ function useCategories() {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["categories"],
     queryFn: () => getCategories(),
-    refetchInterval: 10000,
+    refetchInterval: 100000,
   });
 
   const categoriesFormOptions = useMemo(() => data?.map((category) => ({
