@@ -1,23 +1,14 @@
 import React from "react";
-import { Responsive, WidthProvider } from "react-grid-layout";
+import { Layout, Responsive, WidthProvider } from "react-grid-layout";
 import Widget from "./components/Widget";
 import "react-grid-layout/css/styles.css";
-
-type WidgetType = 'productsColumns' | 'salesByMonth' | 'productCard' | 'totalExpensesCost' | 'totalSales' | 'expensesByCategory';
-
-type GridLayoutType = {
-  i: WidgetType;
-  x: number;
-  y: number;
-  w: number;
-  h: number;
-}[]
+import useLocalStorage from "@/hooks/useLocalStorage";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const BREAKPOINTS = { md: 1920, sm: 1366, xs: 1200 };
 
-const GRID_LAYOUT: GridLayoutType = [
+const GRID_LAYOUT_DEFAULT: Layout[] = [
   { i: "salesByMonth", x: 0, y: 0, w: 3, h: 2 },
   { i: "productsColumns", x: 4, y: 0, w: 3, h: 2 },
   { i: "expensesByCategory", x: 0, y: 0, w: 3, h: 2 },
@@ -34,6 +25,12 @@ const COLUMNS = {
 const ROW_HEIGHT = 168;
 
 function DashboardScreen() {
+  const [gridLayout, setGridLayout] = useLocalStorage("dashboard", GRID_LAYOUT_DEFAULT);
+
+  const onDragStop = (layout: Layout[]) => {
+    setGridLayout(layout)
+  }
+
   return (
     <div
       style={{
@@ -47,7 +44,7 @@ function DashboardScreen() {
       <ResponsiveGridLayout
         containerPadding={[0, 0]}
         className="layout"
-        layouts={{ md: GRID_LAYOUT }}
+        layouts={{ md: gridLayout }}
         breakpoints={BREAKPOINTS}
         isResizable={false}
         draggableHandle=".react-grid-dragHandle"
@@ -55,8 +52,9 @@ function DashboardScreen() {
         compactType="vertical"
         verticalCompact
         cols={COLUMNS}
+        onDragStop={(layout) => onDragStop(layout)}
       >
-        {GRID_LAYOUT.map((item) => (
+        {GRID_LAYOUT_DEFAULT.map((item) => (
           <div key={item.i}>
             <Widget type={item.i} />
           </div>
