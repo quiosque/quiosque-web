@@ -3,7 +3,6 @@ const currencyToNumber = (formattedValue: string): number => {
     .replace(/[^\d,.-]/g, "")
     .replace(",", ".");
 
-    console.log(numericValue)
   return parseFloat(numericValue);
 };
 
