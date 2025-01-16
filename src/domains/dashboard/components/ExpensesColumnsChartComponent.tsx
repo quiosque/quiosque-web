@@ -38,8 +38,6 @@ function ExpensesCollumnsChartComponent() {
     [data]
   );
 
-  console.log(formattedData);
-
   return (
     <div className="p-0 w-full">
       <BarChart

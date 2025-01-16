@@ -34,7 +34,7 @@ function useDashData() {
   const { data: dashData, error, isLoading } = useQuery({
     queryKey: ["dashboard"],
     queryFn: () => getDashData(),
-    refetchInterval: 4000,
+    refetchInterval: 40000,
   });
   const { data: expensesData } = useExpenses();
 
