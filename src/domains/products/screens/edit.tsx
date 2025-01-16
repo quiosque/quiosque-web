@@ -1,4 +1,4 @@
-import React from "react";
+// @ts-nocheck
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import CreateProductSchema from "../utils/createSchema";

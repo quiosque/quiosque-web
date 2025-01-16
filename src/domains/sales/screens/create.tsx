@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { BadgeDollarSign } from "lucide-react";
 import useSaleMutation from "../hooks/useNewSale";
@@ -71,7 +71,10 @@ export function CreateSale() {
           <TemplateModal.Title>Realizar venda</TemplateModal.Title>
           <ProductsSelection
             onSelect={handleProductSelection}
-            collection={productsCollection}
+            collection={productsCollection?.map(product => ({
+              ...product,
+              category: product.category ?? ''
+            }))}
           />
           <Label htmlFor="sold_at">Data da venda</Label>
           <Calendar
@@ -86,7 +89,7 @@ export function CreateSale() {
           />
         </div>
 
-        <p style={{ color: '#64748B', fontSize: 16, fontWeight: 'regular' }}>
+        <p style={{ color: '#0f1114', fontSize: 16, fontWeight: 'regular' }}>
           Valor total dos produtos: R$ {saleTotalValue}
         </p>
 

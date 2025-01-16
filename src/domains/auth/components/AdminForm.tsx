@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -33,7 +32,7 @@ export function AdminForm() {
     },
   });
 
-  const onSubmit = (data: FormInput) => {
+  const onSubmit = () => {
     navigate({ to: "/dashboard" });
   };
 

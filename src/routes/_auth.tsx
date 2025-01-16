@@ -1,4 +1,3 @@
-import * as React from "react";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 import AppSideBar from "@/components/AppSideBar";
 import { SidebarProvider } from "@/components/ui/sidebar";

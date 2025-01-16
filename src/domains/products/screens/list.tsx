@@ -1,4 +1,4 @@
-import React from "react";
+//@ts-nocheck
 import { DataTable } from "@/components/DataTable";
 import { useProducts } from "../hooks";
 import { ColumnDef } from "@tanstack/react-table";

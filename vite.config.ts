@@ -5,6 +5,11 @@ import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
 
 export default defineConfig({
   plugins: [react(), TanStackRouterVite()],
+  esbuild: {
+    loader: "tsx",
+    include: /\.tsx?$/,
+    jsx: "automatic",
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
