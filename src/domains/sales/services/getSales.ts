@@ -3,10 +3,10 @@ import type { SaleResponseData } from "../types";
 
 const endpoint: string = "/Sale";
 
-const getSales = async () => {
+const getSales = async (storeId: number = 1) => {
   try {
     const { data: response } = await httpClient.get<SaleResponseData[]>(
-      `${endpoint}?store_id=1`,
+      `${endpoint}?store_id=${storeId}`,
     )
 
     return response;
