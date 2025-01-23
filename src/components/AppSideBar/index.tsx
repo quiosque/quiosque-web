@@ -15,15 +15,15 @@ import QuiosqueLogo from "@/assets/quiosque.svg";
 import { Logo, LogoLink } from "./styles";
 import { CreateSale } from "@/domains/sales/screens/create";
 
+const generateGetStyle = (currentRoute: string) => (url: string) => ({
+  backgroundColor: currentRoute.includes(url)
+    ? "rgba(0, 0, 0, 0.1)"
+    : "transparent",
+  borderRadius: 4,
+});
+
 function AppSidebar() {
   const [currentRoute, setCurrentRoute] = useState(window.location.href);
-
-  const getStyle = (url: string) => ({
-    backgroundColor: currentRoute.includes(url)
-      ? "rgba(0, 0, 0, 0.1)"
-      : "transparent",
-    borderRadius: 4,
-  });
 
   return (
     <Sidebar>
@@ -45,7 +45,7 @@ function AppSidebar() {
                   {group.items.map((item) => (
                     <SidebarMenuItem
                       key={item.title}
-                      style={getStyle(item.url)}
+                      style={generateGetStyle(currentRoute)(item.url)}
                     >
                       <SidebarMenuButton asChild>
                         <Link to={item.url} onClick={() => setCurrentRoute(item.url)}>
