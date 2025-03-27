@@ -1,7 +1,8 @@
 import { DataTable } from "@/components/DataTable";
-import useSales  from "../hooks/useSales";
+import useSales from "../hooks/useSales";
 import { ColumnDef } from "@tanstack/react-table";
 import { SaleResponseData } from "../types";
+import ProductsList from "../components/ProductsList";
 
 function ListSalesScreen() {
   const { data, isLoading } = useSales();
@@ -10,16 +11,18 @@ function ListSalesScreen() {
     {
       accessorKey: "id",
       header: "ID",
+      cell: ({ row }) => <p className="font-medium">#{row.original.id}</p>,
     },
     {
       accessorKey: "total_value",
       header: "Valor da venda",
       cell: ({ row }) => {
-        return new Intl.NumberFormat("pt-BR", {
+        const value = new Intl.NumberFormat("pt-BR", {
           style: "currency",
           currency: "BRL",
         }).format(row.original.total_value);
-      }
+        return <p className="font-medium text-green-600">{value}</p>;
+      },
     },
     {
       accessorKey: "sold_at",
@@ -32,22 +35,16 @@ function ListSalesScreen() {
       accessorKey: "products",
       header: "Produtos vendidos",
       cell: ({ row }) => {
-        return (
-          <>
-            {row.original.products.map((product) => (
-              <div key={product.id} className="flex items-center gap-3" >
-                <span>{product.name}:</span>
-                <span className="bg-primary text-white rounded w-4 items-center justify-center inline-flex ">{product.quantity}</span>
-              </div>
-            ))}
-          </>
-        )
+        return <ProductsList products={row.original.products} />;
       },
-    }
+    },
   ];
 
   return (
-    <div className="container py-10 px-10" style={{ backgroundColor: "rgb(249 250 251 / var(--tw-bg-opacity, 1))" }}>
+    <div
+      className="container py-10 px-10"
+      style={{ backgroundColor: "rgb(249 250 251 / var(--tw-bg-opacity, 1))" }}
+    >
       <DataTable columns={columns} data={data} isLoading={isLoading} />
     </div>
   );
