@@ -2,7 +2,7 @@ import httpClient from "@/infrastructure/axios";
 
 const endpoint: string = "/Product";
 
-const deleteItem = async (id: number) => {
+const deleteProduct = async (id: number) => {
   try {
     const { data: response } = await httpClient.delete(
       `${endpoint}?id=${id}`,
@@ -16,4 +16,4 @@ const deleteItem = async (id: number) => {
   }
 };
 
-export default deleteItem;
+export default deleteProduct;

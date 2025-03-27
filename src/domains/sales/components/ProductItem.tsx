@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { PlusSquareIcon, MinusSquareIcon } from "lucide-react";
+import { PlusSquareIcon, MinusSquareIcon, SquareX } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { currencyFormat } from '@/formatters';
 
 type CollectionItems = {
   id: number;
@@ -15,7 +16,7 @@ type ProductItemProps = {
 };
 
 function ProductItem(props: ProductItemProps) {
-  const { product, onChange } = props;
+  const { product, onChange, onRemove } = props;
   const [quantity, setQuantity] = useState(1);
 
   const handleQuantityChange = (quantity: number) => {
@@ -28,25 +29,31 @@ function ProductItem(props: ProductItemProps) {
   };
 
   const removeQuantity = () => {
-    if(quantity === 1) return;
+    if (quantity === 1) {
+      onRemove(product.id.toString());
+      return;
+    };
 
     handleQuantityChange(quantity - 1);
   };
 
   return (
     <div className="flex items-center gap-2 p-1 mt-2">
-      <p className='flex-1'>{product.name}</p>
-      <div className='max-w-[200px] flex items-center gap-2'>
-
-      <PlusSquareIcon onClick={addQuantity} />
-      <Input
-        value={quantity}
-        type="number"
-        onChange={(event) => handleQuantityChange(Number(event.target.value))}
-        min={1}
+      <div className="flex flex-1 flex-col items-start justify-center gap-2">
+        <p>{product.name}</p>
+        <p style={{ color: "#a5a8af" }}>UN: {currencyFormat(Number(product.price))}</p>
+      </div>
+      <div className="max-w-[200px] flex items-center gap-2">
+        <PlusSquareIcon onClick={addQuantity} className="cursor-pointer text-[#a5a8af] text-xs max-w-[20px] hover:text-gray-600"/>
+        <Input
+          value={quantity}
+          type="number"
+          onChange={(event) => handleQuantityChange(Number(event.target.value))}
+          min={1}
+          className="max-w-[60px]"
         />
-      <MinusSquareIcon onClick={removeQuantity} className='text-'/>
-        </div>
+        <MinusSquareIcon onClick={removeQuantity} className="cursor-pointer text-[#a5a8af] text-xs max-w-[20px] hover:text-gray-600"/>
+      </div>
     </div>
   );
 }

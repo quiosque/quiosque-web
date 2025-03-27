@@ -1,4 +1,5 @@
 import {
+  LayoutDashboard,
   ChartLine,
   ChartBarBig,
   LucideIcon,
@@ -25,7 +26,7 @@ export const MENU_GROUP_ITEMS: Array<MenuGroup> = [
       {
         title: "Dashboard",
         url: "/dashboard",
-        icon: ChartLine,
+        icon: LayoutDashboard,
       },
     ],
   },

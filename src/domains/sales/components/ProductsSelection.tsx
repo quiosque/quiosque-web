@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { useEffect, useMemo, useState } from "react";
 import { MultiSelect } from "@/components/ui/multi-select";
@@ -72,14 +73,21 @@ export function ProductsSelection(props: ProductsSelectionProps) {
 
   const getProduct = createGetProductHandler(collection);
 
-  useEffect(() => onSelect(formatteProducts(selectedProducts, collection)), [selectedProducts, onSelect, collection]);
+  useEffect(
+    () => onSelect(formatteProducts(selectedProducts, collection)),
+    [selectedProducts, onSelect, collection]
+  );
 
   return (
-    <div>
+    <div className="flex flex-col gap-4">
+      <div>
       <Label>Selecione os produtos</Label>
       <MultiSelect options={options} onSelect={handleSelect} />
+      </div>
 
-      <div>
+      <div className="min-h-[300px] max-h-[416px] pt-1 p-4 overflow-auto rounded" style={{
+        backgroundColor: "rgb(250 250 250 / var(--tw-bg-opacity, 1))"
+      }}>
         {selectedProducts.map((product) => (
           <ProductItem
             key={product.id}
@@ -88,6 +96,11 @@ export function ProductsSelection(props: ProductsSelectionProps) {
             onRemove={handleRemoveItem}
           />
         ))}
+        {selectedProducts.length === 0 && (
+          <div className="text-center text-slate-400 mt-20">
+            Nenhum produto selecionado
+          </div>
+        )}
       </div>
     </div>
   );

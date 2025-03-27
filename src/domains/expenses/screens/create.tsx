@@ -39,6 +39,8 @@ function CreateExpenseScreen() {
   const onSubmit = (data: z.infer<typeof CreateExpenseSchema>) => {
     const formattedData = { ...data, cost: currencyToNumber(data.cost) };
 
+    console.log({ formattedData });
+
     mutate(formattedData);
   };
 
