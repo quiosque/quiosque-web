@@ -9,6 +9,13 @@ import { Toaster } from "@/components/ui/toaster";
 const router = createRouter({ routeTree });
 const queryClient = new QueryClient();
 
+declare global {
+  interface Window {
+    Quiosque: {
+      store_id: number | null;
+    };
+  }
+}
 
 // This is a crime against humanity, but we need to declare the global variable
 (() => {
