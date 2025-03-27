@@ -9,7 +9,7 @@ const createProduct = async (data: Omit<ProductFormValues, "store_id">) => {
       `${endpoint}`,
       {
         ...data,
-        store_id: 1
+        store_id: Quiosque.store_id
       }
     )
 

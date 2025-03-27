@@ -5,7 +5,10 @@ interface User {
   id: number
   name: string
   email: string
-  store_id: string 
+  store: {
+    id: number;
+    name: string;
+  };
 }
 
 interface QuiosqueState {
@@ -21,7 +24,7 @@ export const useQuiosqueStore = create<QuiosqueState>((set) => ({
   store_id: null,
   setUser: (userData) => set(() => ({
     user: userData,
-    store_id: userData.store_id
+    store_id: userData.store.id.toString()
   })),
   clearUser: () => set(() => ({
     user: null,

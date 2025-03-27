@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { DataTable } from "@/components/DataTable";
 import { useItems } from "../hooks";
@@ -71,7 +72,7 @@ function ListItemsScreen() {
         const handleDelete = async () => {
           await deleteItem(rowId);
           refetch();
-        }
+        };
 
         return (
           <DropdownMenu>
@@ -87,10 +88,7 @@ function ListItemsScreen() {
               <Link to={`/items/edit/${rowId}`}>
                 <DropdownMenuItem>Editar</DropdownMenuItem>
               </Link>
-              <DropdownMenuItem
-                className="text-red-600"
-                onClick={handleDelete}
-              >
+              <DropdownMenuItem className="text-red-600" onClick={handleDelete}>
                 Deletar
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -101,7 +99,10 @@ function ListItemsScreen() {
   ];
 
   return (
-    <div className="container mx-auto py-10">
+    <div
+      className="container px-10 py-10"
+      style={{ backgroundColor: "rgb(249 250 251 / var(--tw-bg-opacity, 1))" }}
+    >
       <DataTable columns={columns} data={data} isLoading={isLoading} />
     </div>
   );

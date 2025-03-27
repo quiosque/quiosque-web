@@ -207,7 +207,7 @@ function ItemsTable(props: TableItemsProps) {
   });
 
   return (
-    <div className="rounded-md border">
+    <div className="rounded-md border bg-white">
       <div className="w-full p-4">
         <div className="flex items-center mb-4">
           <Input
@@ -245,7 +245,7 @@ function ItemsTable(props: TableItemsProps) {
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-        <div className="rounded-md border">
+        <div className="rounded-md border bg-white">
           <Table>
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (

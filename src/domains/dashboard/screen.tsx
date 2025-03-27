@@ -13,6 +13,7 @@ const GRID_LAYOUT_DEFAULT: Layout[] = [
   { i: "expensesByCategory", x: 0, y: 0, w: 3, h: 2 },
   { i: "totalExpensesCost", x: 4, y: 4, w: 1, h: 1 },
   { i: "totalSales", x: 5, y: 4, w: 1, h: 1 },
+  { i: "saldo", x: 3, y: 6, w: 1, h: 1 },
 ];
 
 const COLUMNS = {
@@ -38,6 +39,7 @@ function DashboardScreen() {
         flex: "1 1 0%",
         gap: "16px",
         padding: "16px 24px",
+        backgroundColor: "rgb(249 250 251 / var(--tw-bg-opacity, 1))",
       }}
     >
       <ResponsiveGridLayout

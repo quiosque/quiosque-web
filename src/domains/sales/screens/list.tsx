@@ -47,7 +47,7 @@ function ListSalesScreen() {
   ];
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container py-10 px-10" style={{ backgroundColor: "rgb(249 250 251 / var(--tw-bg-opacity, 1))" }}>
       <DataTable columns={columns} data={data} isLoading={isLoading} />
     </div>
   );

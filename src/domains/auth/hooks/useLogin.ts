@@ -11,7 +11,10 @@ interface LoginData {
     id: number;
     name: string;
     email: string;
-    store_id: string;
+    store: {
+      id: number;
+      name: string;
+    };
     permission: number;
     username: string;
   };
@@ -42,6 +45,7 @@ const useLoginMutation = () => {
         variant: "success",
       });
       setUser(data.user);
+      window.Quiosque.store_id = data.user.store.id.toString();
     },
     onMutate: () => {
       setLoading(true);

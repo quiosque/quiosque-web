@@ -7,6 +7,7 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  ResponsiveContainer,
 } from "recharts";
 
 const monthNames = [
@@ -40,30 +41,30 @@ function LineChartComponent(props: {
   );
 
   return (
-    <div className="p-0 w-full">
-      <LineChart
-        width={800}
-        height={300}
-        data={formattedData}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip formatter={(value) => `R$ ${value}`}/>
-        <Legend />
-        <Line
-          type="monotone"
-          dataKey="Valor"
-          stroke="#8884d8"
-          activeDot={{ r: 8 }}
-        />
-      </LineChart>
+    <div className="w-full h-full">
+      <ResponsiveContainer width="100%" height="86%">
+        <LineChart
+          data={formattedData}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip formatter={(value) => `R$ ${value}`} />
+          <Legend />
+          <Line
+            type="monotone"
+            dataKey="Valor"
+            stroke="#8884d8"
+            activeDot={{ r: 8 }}
+          />
+        </LineChart>
+      </ResponsiveContainer>
     </div>
   );
 }

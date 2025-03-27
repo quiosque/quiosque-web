@@ -91,7 +91,7 @@ function ListExpensesScreen() {
   ];
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto px-10 py-10">
       <DataTable columns={columns} data={data} isLoading={isLoading} />
     </div>
   );

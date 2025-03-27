@@ -7,7 +7,7 @@ export const Route = createFileRoute("/_auth")({
   component: RouteComponent,
   beforeLoad: async () => {
     const { user } = useQuiosqueStore.getState() 
-    console.log({user})
+
     if (!user) {
       throw redirect({
         to: '/login',

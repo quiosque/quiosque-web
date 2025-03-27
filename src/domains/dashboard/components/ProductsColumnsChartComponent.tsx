@@ -8,6 +8,7 @@ import {
   Legend,
   BarChart,
   Bar,
+  ResponsiveContainer,
 } from "recharts";
 
 function ProductsColumnsChartComponent() {
@@ -23,25 +24,26 @@ function ProductsColumnsChartComponent() {
   );
 
   return (
-    <div className="p-0 w-full">
-      <BarChart
-        width={800}
-        height={300}
-        data={formattedData}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip formatter={(value) => `R$ ${value}`}/>
-        <Legend />
-        <Bar dataKey="Preço" fill="#8884d8" />
-      </BarChart>
+    <div className="w-full h-full">
+      <ResponsiveContainer width="100%" height="86%">
+        <BarChart
+          data={formattedData}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+          barCategoryGap={8}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip formatter={(value) => `R$ ${value}`} />
+          <Legend />
+          <Bar dataKey="Preço" fill="#8884d8" />
+        </BarChart>
+      </ResponsiveContainer>
     </div>
   );
 }

@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { useExpenses } from "@/domains/expenses/hooks";
 import { useMemo } from "react";
@@ -9,6 +10,7 @@ import {
   Legend,
   BarChart,
   Bar,
+  ResponsiveContainer
 } from "recharts";
 
 function formatData(data) {
@@ -39,10 +41,9 @@ function ExpensesCollumnsChartComponent() {
   );
 
   return (
-    <div className="p-0 w-full">
+    <div className="w-full h-full">
+      <ResponsiveContainer width="100%" height="86%">
       <BarChart
-        width={800}
-        height={300}
         data={formattedData}
         margin={{
           top: 5,
@@ -58,6 +59,7 @@ function ExpensesCollumnsChartComponent() {
         <Legend />
         <Bar dataKey="Custo" fill="#8884d8" />
       </BarChart>
+      </ResponsiveContainer>
     </div>
   );
 }

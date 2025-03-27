@@ -1,11 +1,11 @@
 import httpClient from '@/infrastructure/axios'
 import { ProductsResponse } from '../types'
 
-const endpoint: string = '/Product'
+const endpoint: string = 'products'
 
 const getProducts = async (): Promise<ProductsResponse[]> => {
   try {
-    const { data: response } = await httpClient.get<ProductsResponse[]>(`${endpoint}`)
+    const { data: response } = await httpClient.get<ProductsResponse[]>(`/Store/${Quiosque.store_id}/${endpoint}`)
 
     return response ?? []
   } catch(error) {
