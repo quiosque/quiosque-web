@@ -8,6 +8,7 @@ type Item = {
   quantity_min: number
   measure: string
   totalCost?: number
+  item_quantity?: number
 }
 
 export default Item;

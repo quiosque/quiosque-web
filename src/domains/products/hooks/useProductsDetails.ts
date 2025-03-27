@@ -21,7 +21,7 @@ function useProductsDetails(id: number) {
     category_id: data?.categoryId ?? null,
     items: data?.items?.map((item) => ({
       item_id: item.id,
-      item_quantity: item.quantity,
+      item_quantity: item.item_quantity,
     })) ?? []
   }), [data])
 

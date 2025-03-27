@@ -71,7 +71,6 @@ function ItemsTable(props: TableItemsProps) {
   const { data: items } = useItems();
   const { items: formItems } = form.watch();
 
-
   const columns: ColumnDef<DataTableType>[] = [
     {
       id: "select",
