@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { PlusSquareIcon, MinusSquareIcon, SquareX } from "lucide-react";
+import { PlusSquareIcon, MinusSquareIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { currencyFormat } from '@/formatters';
 

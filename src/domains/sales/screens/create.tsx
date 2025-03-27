@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, BadgeDollarSign, ShoppingCart } from "lucide-react";
+import { ArrowLeft, ShoppingCart } from "lucide-react";
 import useSaleMutation from "../hooks/useNewSale";
 import { Calendar } from "@/components/ui/calendar";
 import { ProductsResponse } from "@/domains/products/types";
