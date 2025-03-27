@@ -14,7 +14,7 @@ function CreateItemScreen() {
   const form = useForm<z.infer<typeof CreateItemSchema>>({
     resolver: zodResolver(CreateItemSchema),
     defaultValues: {
-      name: "",
+      username: "",
       description: "",
       quantity: 1,
       measure: "",

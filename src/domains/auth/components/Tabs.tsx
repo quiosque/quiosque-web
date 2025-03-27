@@ -15,7 +15,7 @@ export function AuthTabs() {
 
       <TabsContent value="colaborator">
         <ColaboratorForm />
-      </TabsContent>
+      </TabsContent> 
     </Tabs>
   );
 }

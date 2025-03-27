@@ -64,8 +64,8 @@ export function ColaboratorForm() {
             </Button>
 
         </CardContent>
-        <CardFooter className="w-full py-0 m-t-auto">
-          <Button className="w-full">Entrar</Button>
+        <CardFooter className="w-full py-0 m-t-auto  cursor-not-allowed">
+          <Button className="w-full" disabled>Disponível em breve</Button>
         </CardFooter>
       </form>
     </Card>

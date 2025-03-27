@@ -11,13 +11,14 @@ interface SelectProps {
   placeholder: string;
   options: { label: string; value: string }[];
   onChange: (value: string) => void;
+  required?: boolean;
 }
 
 function SelectComponent(props: SelectProps) {
-  const { placeholder, options, onChange } = props;
+  const { placeholder, options, onChange, required } = props;
 
   return (
-    <Select onValueChange={onChange}>
+    <Select onValueChange={onChange} required={required}>
       <SelectTrigger className="w-full">
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>

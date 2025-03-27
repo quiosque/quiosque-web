@@ -17,6 +17,7 @@ import {
 } from "./styles";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "@tanstack/react-router";
+import { useLogin } from "../hooks";
 
 type FormInput = {
   email: string;
@@ -24,6 +25,7 @@ type FormInput = {
 };
 
 export function AdminForm() {
+  const { mutate } = useLogin();
   const navigate = useNavigate({ from: "/" });
   const { register, handleSubmit } = useForm<FormInput>({
     defaultValues: {
@@ -32,8 +34,8 @@ export function AdminForm() {
     },
   });
 
-  const onSubmit = () => {
-    navigate({ to: "/dashboard" });
+  const onSubmit = (data: FormInput) => {
+    mutate(data)
   };
 
   const handleRegisterButton = () => {
@@ -56,6 +58,7 @@ export function AdminForm() {
               id="email"
               type="email"
               placeholder="exemplo@exemplo.com"
+              required
               {...register("email")}
             />
           </div>
@@ -65,6 +68,7 @@ export function AdminForm() {
               id="password"
               type="password"
               placeholder="* * * * * * * *"
+              required
               {...register("password")}
             />
           </div>

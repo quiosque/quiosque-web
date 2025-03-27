@@ -28,7 +28,7 @@ function CreateExpenseScreen() {
   const form = useForm<z.infer<typeof CreateExpenseSchema>>({
     resolver: zodResolver(CreateExpenseSchema),
     defaultValues: {
-      name: "",
+      username: "",
       description: "",
       type: "",
       cost: "R$ 0,00",

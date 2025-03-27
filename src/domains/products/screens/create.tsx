@@ -21,7 +21,7 @@ function CreateItemScreen() {
     resolver: zodResolver(CreateProductSchema),
     defaultValues: {
       id: null,
-      name: "",
+      username: "",
       description: "",
       price: "R$ 0,00",
       category_id: null,
