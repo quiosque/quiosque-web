@@ -93,8 +93,9 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
     font-size: 14px;
+    background-color: #f9fafb;
   }
 }
 
