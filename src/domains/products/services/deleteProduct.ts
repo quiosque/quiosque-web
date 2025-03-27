@@ -1,6 +1,6 @@
 import httpClient from "@/infrastructure/axios";
 
-const endpoint: string = "/Item";
+const endpoint: string = "/Product";
 
 const deleteItem = async (id: number) => {
   try {
