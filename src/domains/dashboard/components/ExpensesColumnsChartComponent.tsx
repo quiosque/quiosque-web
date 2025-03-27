@@ -25,7 +25,7 @@ function formatData(data) {
 
   return Object.entries(groupedData).map(([type, totalCost]) => ({
     type,
-    Custo: totalCost
+    Custo: totalCost.toFixed(2),
   }));
 }
 
@@ -54,7 +54,7 @@ function ExpensesCollumnsChartComponent() {
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="type" />
         <YAxis />
-        <Tooltip />
+        <Tooltip formatter={(value) => `R$ ${value}`}/>
         <Legend />
         <Bar dataKey="Custo" fill="#8884d8" />
       </BarChart>

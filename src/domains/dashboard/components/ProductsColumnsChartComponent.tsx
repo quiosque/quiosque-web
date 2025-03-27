@@ -38,7 +38,7 @@ function ProductsColumnsChartComponent() {
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />
-        <Tooltip />
+        <Tooltip formatter={(value) => `R$ ${value}`}/>
         <Legend />
         <Bar dataKey="Preço" fill="#8884d8" />
       </BarChart>

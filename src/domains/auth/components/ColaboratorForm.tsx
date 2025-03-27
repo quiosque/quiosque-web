@@ -23,7 +23,7 @@ export function ColaboratorForm() {
       password: "",
     },
   });
-
+  
   const onSubmit = (data: FormInput) => {
     console.log(data);
   }
