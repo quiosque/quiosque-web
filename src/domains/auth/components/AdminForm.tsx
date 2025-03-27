@@ -36,6 +36,10 @@ export function AdminForm() {
     navigate({ to: "/dashboard" });
   };
 
+  const handleRegisterButton = () => {
+    navigate({ to: "/register" });
+  }
+
   return (
     <Card className="flex flex-col items-start">
       <CardHeader>
@@ -85,7 +89,7 @@ export function AdminForm() {
       </DividersContainer>
       <SignInContainer>
         <p> Não está cadastrado? </p>
-        <SignInButton>Crie uma conta agora</SignInButton>
+        <SignInButton onClick={handleRegisterButton}>Crie uma conta agora</SignInButton>
       </SignInContainer>
     </Card>
   );

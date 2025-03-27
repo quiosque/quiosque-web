@@ -1,16 +1,16 @@
 import CarouselComponent from "./components/Carousel";
-import { AuthTabs } from "./components/Tabs";
+import { CreateAccountForm } from "./components/CreateAccountForm";
 import { Container, FormContainer} from "./styles";
 
-function AuthScreen() {
+function CreateAccountScreen() {
   return (
     <Container>
       <CarouselComponent />
       <FormContainer>
-        <AuthTabs />
+        <CreateAccountForm />
       </FormContainer>
     </Container>
-  );
+  )
 }
 
-export default AuthScreen;
+export default CreateAccountScreen
