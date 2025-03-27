@@ -17,7 +17,7 @@ import { useRegister } from "../hooks";
 const MAIN_ACTIVITY_OPTIONS = ["Comércio", "Indústria", "Serviços"];
 
 export type FormInput = {
-  username: string;
+  name: string;
   password: string;
   email: string;
   cnpj: string;
@@ -31,7 +31,7 @@ export function CreateAccountForm() {
   const navigate = useNavigate({ from: "/" });
   const { register, handleSubmit, setValue } = useForm<FormInput>({
     defaultValues: {
-      username: "",
+      name: "",
       password: "",
       email: "",
       cnpj: "",
@@ -63,8 +63,8 @@ export function CreateAccountForm() {
       >
         <CardContent className="space-y-2 flex flex-col w-full items-start">
           <div className="space-y-1 w-full">
-            <Label htmlFor="username">Nome</Label>
-            <Input id="username" placeholder="Nome" {...register("username")} />
+            <Label htmlFor="name">Nome</Label>
+            <Input id="name" placeholder="Nome" {...register("name")} />
           </div>
           <div className="space-y-1 w-full">
             <Label htmlFor="email">Email</Label>

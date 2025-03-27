@@ -25,7 +25,7 @@ type FormInput = {
 };
 
 export function AdminForm() {
-  const { mutate } = useLogin();
+  const { mutate, loading } = useLogin();
   const navigate = useNavigate({ from: "/" });
   const { register, handleSubmit } = useForm<FormInput>({
     defaultValues: {
@@ -83,7 +83,7 @@ export function AdminForm() {
             */}
         </CardContent>
         <CardFooter className="w-full py-0">
-          <Button className="w-full">Entrar</Button>
+          <Button className="w-full">{loading ? 'Loading...' : 'Entrar'}</Button>
         </CardFooter>
       </form>
       <DividersContainer>
@@ -93,7 +93,9 @@ export function AdminForm() {
       </DividersContainer>
       <SignInContainer>
         <p> Não está cadastrado? </p>
-        <SignInButton onClick={handleRegisterButton}>Crie uma conta agora</SignInButton>
+        <SignInButton onClick={handleRegisterButton}>
+          Crie uma conta agora
+        </SignInButton>
       </SignInContainer>
     </Card>
   );
