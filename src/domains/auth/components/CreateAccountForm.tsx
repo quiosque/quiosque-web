@@ -18,6 +18,7 @@ const MAIN_ACTIVITY_OPTIONS = ["Comércio", "Indústria", "Serviços"];
 
 export type FormInput = {
   name: string;
+  username: string;
   password: string;
   email: string;
   cnpj: string;
@@ -32,6 +33,7 @@ export function CreateAccountForm() {
   const { register, handleSubmit, setValue } = useForm<FormInput>({
     defaultValues: {
       name: "",
+      username: "",
       password: "",
       email: "",
       cnpj: "",
@@ -42,7 +44,12 @@ export function CreateAccountForm() {
   });
 
   const onSubmit = (data: FormInput) => {
-    mutate(data);
+    const formattedData = {
+      ...data,
+      username: data.email
+    }
+    
+    mutate(formattedData);
   };
 
   const onCancel = () => {
